@@ -2,7 +2,7 @@ var app = angular.module("chat", []);
 
 app.controller("MainCtrl", ["$scope", function($scope){
   $scope.messages = [];
-  var conn = new WebSocket("ws://localhost:8080/ws");
+  var conn = new WebSocket("ws://{{$}}:8080/ws");
   conn.onclose = function(e){
     $scope.$apply(function(){
       $scope.messages.push('Disconnected');
