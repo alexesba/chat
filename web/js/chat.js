@@ -2,6 +2,7 @@ var app = angular.module("chat", []);
 
 app.controller("MainCtrl", ["$scope", function($scope){
   $scope.messages = [];
+  $scope.msg = '';
   var conn = new WebSocket("ws://localhost:8080/ws");
   conn.onclose = function(e){
     $scope.$apply(function(){
@@ -23,7 +24,9 @@ app.controller("MainCtrl", ["$scope", function($scope){
   }
 
   $scope.send = function(){
-    conn.send($scope.msg);
-    $scope.msg = '';
+    if($scope.msg != ''){
+      conn.send($scope.msg);
+      $scope.msg = '';
+    }
   }
 }]);
